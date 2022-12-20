@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Heartbeat Notification</title>
+</head>
+
+<body>
+<p>
+    <strong><span th:text="${product_code}"></span> <span th:text="${job_name}"></span></strong> processing task was getting triggered at <strong><span th:text="${job_triggered}"></span></strong><br>
+</p>
+<p>
+    <strong>correlation id:</strong> <span th:text="${correlation_id}"></span>
+</p>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+server:
+  application:
+    name: spring-boot-kotlin--bulk
+  port: 8080
+  servlet:
+    context-path: /bulk
+
+spring:
+  application:
+    name: '@project.name@'
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        jdbc:
+          batch_size: 100
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    root: DEBUG
+
+management:
+  info.env.enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, prometheus
+      base-path: /
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  build:
+    groupId: '@project.groupId@'
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+    encoding: '@project.build.sourceEncoding@'
+    datetime: '@timestamp@'
+    java:
+      version: '@java.version@'
+
+# STARTER LIBRARY CONFIG
+########################################
+starter:
+  application-code: BLK
+
+  rest-template:
+    connection-request-timeout: 5000
+    connect-timeout: 5000
+    socket-timeout: 10000
+    pooling:
+      connection-limit: 101
+      max-connection-per-route: 52
+
+# APPLICATION CONFIG
+########################################
+config:
+  datasource:
+    bulk:
+      jdbc-url: jdbc:mysql://localhost:3306/bulk?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8
+      username: root
+      password: ''
+      hikari:
+        connectionTimeout: 10000
+        idleTimeout: 10000
+        maxLifetime: 30000
+        minimum-idle: 1
+        maximum-pool-size: 5
+
+    raw:
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres?currentSchema=raw&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8
+      username: root
+      password: ''
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        connectionTimeout: 10000
+        idleTimeout: 10000
+        maxLifetime: 30000
+        minimum-idle: 1
+        maximum-pool-size: 5
+
+  query:
+    batch-size:
+      bulk: 1
+      build-task: 1
+
+  bulk:
+    auto-retry:
+      max: 0
+      interval-minutes: 1
+    concurrent:
+      a-task: 1
+      b-task: 1
+
+  data-retention-days: 45
+
+  email:
+    heartbeat:
+      from: kw-bulk@service.com
+      to: ''
+      subject: 'Local - {product_code} __ Heartbeat Notification'
+      body-template: 'heartbeat.html'
+    summary:
+      from: kw-bulk@service.com
+      to: ''
+      subject: 'Local - {product_code} __ Summary __ On {job_as_of_date}, Attempts {job_attempt}'
+      body-template: 'summary.html'
+
+  aws:
+    sqs:
+      consumer: kw--sd-queue-local--1
+
+# API CONFIG
+########################################
+api:
+  upstream-service1:
+    base-url: https://...
+    access-key: '3cafe06f7c634117823ff1ef159aa772'
+
+  upstream-service2:
+    base-url: https://...
+    access-key: '60eba72ccf7e40d390d1b98f0d1bfde9'
+
+  notification:
+    base-url: https://.../notification
+    endpoints:
+      send-email: ${api.notification.base-url}/api/v2/email

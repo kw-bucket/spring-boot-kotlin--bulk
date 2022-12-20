@@ -1,0 +1,2 @@
+CREATE INDEX product_bucket_tasks_client_key ON product_bucket_calculation_task(client_key);
+CREATE INDEX product_bucket_tasks_product_code ON product_bucket_calculation_task(product_code);

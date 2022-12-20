@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bulk Summary</title>
+    <style>
+        ul { padding-left: 2em; }
+
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1.25em; }
+
+        .sub { margin: 1em 2em; }
+        .frame {
+            padding: 0.25em 0.5em;
+            border-radius: 0.25em;
+            border-style: double;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <h1><span th:text="${job.productCode}"></span> Bulk Processing Summary</h1>
+    <p>
+        <strong>Correlation ID:</strong> <span th:text="${correlation_id}"></span>
+    </p>
+    <p>
+        <strong>ID:</strong> <span th:text="${job.id}"></span><br>
+        <strong>As of Date:</strong> <span th:text="${job.asOfDate}"></span><br>
+        <strong>Trigger Source:</strong> <span th:text="${job.triggerSource}"></span><br>
+    </p>
+    <p>
+        <strong>Attempts:</strong> <span th:text="${job.attempts()}"></span><br>
+        <strong>Start time:</strong> <span th:text="${job.lastStartedAt}"></span><br>
+        <strong>End time:</strong> <span th:text="${job.updatedAt}"></span><br>
+    </p>
+    <p>
+        <strong>Status:</strong> <span th:text="${job.status}"></span></strong><br>
+    </p>
+</div>
+
+<div>
+    <h2 class="frame">A Task</h2>
+    <strong>Total:</strong> <span th:text="${a__task_count}"></span><br>
+    <div class="sub">
+        <b>A/1</b> - <span th:text="${job.isA1Enabled} ? 'Enabled' : 'Disabled'"></span> -
+        <ul>
+            <li>Success: <span th:text="${a1__success_count}"></span></li>
+            <li>Failed: <span th:text="${a1__failure_count}"></span></li>
+        </ul>
+    </div>
+
+    <div class="sub">
+        <b>A/2</b> - <span th:text="${job.isA2Enabled} ? 'Enabled' : 'Disabled'"></span> -
+        <ul>
+            <li>Success: <span th:text="${a2__success_count}"></span></li>
+            <li>Failed: <span th:text="${a2__failure_count}"></span></li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <h2 class="frame">A/X Task</h2>
+    <strong>Total: </strong> <span th:text="${x__task_count}"></span><br>
+    <div class="sub">
+        <b>Process</b> - <span th:text="${job.isAXEnabled} ? 'Enabled' : 'Disabled'"></span> -
+        <ul>
+            <li>Success: <span th:text="${x__success_count}"></span></li>
+            <li>Failed: <span th:text="${x__failure_count}"></span></li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <h2 class="frame">B Task</h2>
+    <strong>Total:</strong> <span th:text="${b__task_count}"></span><br>
+    <div class="sub">
+        <b>Process</b> - <span th:text="${job.isBEnabled} ? 'Enabled' : 'Disabled'"></span> -
+        <ul>
+            <li>Success: <span th:text="${b__success_count}"></span></li>
+            <li>Failed: <span th:text="${b__failure_count}"></span></li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "status": {
+    "code": "COL2000",
+    "message": "Success.",
+    "description": "Calculate collection service flag Success."
+  },
+  "data": [
+      {
+        "client_encoded_key": "cli-key",
+        "account_id": "acc-1",
+        "account_number": "acc-1",
+        "collection_service_flag": true
+      },
+      {
+        "client_encoded_key": "cli-key",
+        "account_id": "acc-2",
+        "account_number": "acc-2",
+        "collection_service_flag": true
+      }
+    ]
+}

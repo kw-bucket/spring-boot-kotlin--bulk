@@ -1,0 +1,2 @@
+ALTER TABLE interest_application_task MODIFY COLUMN result_description TEXT;
+ALTER TABLE product_bucket_calculation_task MODIFY COLUMN result_description TEXT;

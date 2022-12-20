@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- debug="true" scan="true" scanPeriod="150 seconds" -->
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Don't forget to set "spring.application.name" in application.yml -->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <property name="LOG_PATH" value="logs"/>
+    <property name="CONSOLE_LOG_PATTERN_TMN" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}|2|%level|%clr(${springAppName:-}){yellow}|%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-},%X{Correlation-ID}|${PID:-}|%thread|%logger{40}|%message%n"/>
+
+    <!-- Appender to log to console in plain text format -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Minimum logging level to be presented in the console logs-->
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="CONSOLE" />
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>true</neverBlock>
+    </appender>
+
+    <root level="CONSOLE">
+        <appender-ref ref="ASYNC_CONSOLE" />
+    </root>
+
+    <logger name="com.rabbitmq.client.TrustEverythingTrustManager" level="OFF"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="javax.activation" level="OFF"/>
+    <logger name="javax.mail" level="OFF"/>
+    <logger name="javax.net" level="OFF"/>
+    <logger name="sun.net" level="OFF"/>
+    <logger name="javax.xml.bind" level="OFF"/>
+    <logger name="com.codahale.metrics" level="OFF"/>
+    <logger name="com.ryantenney" level="OFF"/>
+    <logger name="com.sun.xml.internal.bind" level="OFF"/>
+    <logger name="com.zaxxer" level="OFF"/>
+    <logger name="io.undertow" level="OFF"/>
+    <logger name="net.sf.ehcache" level="OFF"/>
+    <logger name="org.apache" level="OFF"/>
+    <logger name="org.bson" level="OFF"/>
+    <logger name="sun.rmi.transport" level="OFF"/>
+    <logger name="org.jboss" level="OFF"/>
+    <logger name="org.thymeleaf" level="OFF"/>
+    <logger name="org.xnio" level="OFF"/>
+    <logger name="org.hibernate.validator" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework.web" level="ERROR"/>
+    <logger name="org.springframework.security" level="ERROR"/>
+    <logger name="org.springframework.cache" level="ERROR"/>
+    <logger name="com.mangofactory.swagger" level="ERROR"/>
+    <logger name="com.wordnik.swagger" level="ERROR"/>
+    <logger name="liquibase" level="ERROR"/>
+    <logger name="springfox" level="ERROR"/>
+    <logger name="io.netty" level="ERROR"/>
+    <logger name="io.lettuce" level="ERROR"/>
+    <logger name="reactor" level="ERROR" />
+    <logger name="org.mongodb.driver" level="INFO"/>
+    <logger name="com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder" level="ERROR"/>
+    <logger name="com.amazonaws" level="ERROR"/>
+    <logger name="org.springframework.cloud.aws" level="INFO" />
+    <logger name="software.amazon.awssdk" level="ERROR"/>
+</configuration>

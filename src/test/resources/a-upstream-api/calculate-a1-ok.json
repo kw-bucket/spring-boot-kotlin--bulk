@@ -1,0 +1,11 @@
+{
+  "status": {
+    "code": "LA2000",
+    "message": "Success",
+    "description": "Success"
+  },
+  "data": {
+    "client_encoded_key": "cli-key",
+    "credit_arrangement_block_code": "crr-code"
+  }
+}
